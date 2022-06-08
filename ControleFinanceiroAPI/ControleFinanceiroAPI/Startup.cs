@@ -1,9 +1,13 @@
+using ControleFinanceiro.BLL.Models;
+using ControleFinanceiro.DAL;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
 using System.IO;
 
 namespace ControleFinanceiroAPI
@@ -20,6 +24,15 @@ namespace ControleFinanceiroAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddDbContext<Contexto>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("ConexaoBD"));
+                options.EnableSensitiveDataLogging();
+            }
+            );
+
+            services.AddIdentity<Usuario, Funcao>().AddEntityFrameworkStores<Contexto>();
+
             services.AddCors();
 
             services.AddSpaStaticFiles(diretorio =>
@@ -61,17 +74,7 @@ namespace ControleFinanceiroAPI
 
             app.UseSpaStaticFiles();
 
-            app.UseSpa(spa =>
-            {
-                spa.Options.SourcePath = Path.Combine(Directory.GetCurrentDirectory(), "ControleFinanceiro-UI");
 
-                if (env.IsDevelopment())
-                {
-                    spa.UseProxyToSpaDevelopmentServer($"http://localhost:4200/");
-                }
-
-            });
-            
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -82,6 +85,19 @@ namespace ControleFinanceiroAPI
             {
                 endpoints.MapControllers();
             });
+
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = Path.Combine(Directory.GetCurrentDirectory(), "ControleFinanceiro-UI");
+                //spa.Options.SourcePath = Path.Combine(System.IO.Directory.GetParent(System.IO.Directory.GetParent(Environment.CurrentDirectory).ToString()).ToString(), "ControleFinanceiro-UI");
+
+                if (env.IsDevelopment())
+                {
+                    spa.UseProxyToSpaDevelopmentServer($"http://localhost:4200/");
+                }
+
+            });
+
         }
     }
 }
