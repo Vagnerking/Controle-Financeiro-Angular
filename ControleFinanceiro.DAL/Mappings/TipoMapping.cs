@@ -27,7 +27,7 @@ namespace ControleFinanceiro.DAL.Mappings
                  new Tipo
                  {
                      TipoId = 2,
-                     Nome = "GANHO"
+                     Nome = "Ganho"
                  });
 
             builder.ToTable("Tipos");
