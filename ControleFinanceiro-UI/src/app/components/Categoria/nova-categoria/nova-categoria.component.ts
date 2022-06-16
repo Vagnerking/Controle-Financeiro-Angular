@@ -4,7 +4,7 @@ import { Tipo } from 'src/app/models/Tipo';
 import { TiposService } from 'src/app/services/tipos.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { ThisReceiver } from '@angular/compiler';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-nova-categoria',
@@ -35,6 +35,10 @@ export class NovaCategoriaComponent implements OnInit {
 
   getPropriedade(){
     return this.formulario.controls;
+  }
+
+  VoltarListagem(): void{
+    this.route.navigate(['categorias/listagemcategorias']);
   }
 
   EnviarFormulario(): void{

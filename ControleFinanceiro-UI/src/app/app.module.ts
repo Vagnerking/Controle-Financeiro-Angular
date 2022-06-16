@@ -17,15 +17,19 @@ import {MatDividerModule} from '@angular/material/divider';
 import {MatSelectModule} from '@angular/material/select';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatDialogModule} from '@angular/material/dialog';
 
-import { ListagemCategoriasComponent } from './components/Categoria/listagem-categorias/listagem-categorias.component';
+import { ListagemCategoriasComponent, DialogExclusaoCategoriasComponent } from './components/Categoria/listagem-categorias/listagem-categorias.component';
 import { NovaCategoriaComponent } from './components/Categoria/nova-categoria/nova-categoria.component';
+import { AtualizarCategoriaComponent } from './components/Categoria/atualizar-categoria/atualizar-categoria.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListagemCategoriasComponent,
-    NovaCategoriaComponent
+    NovaCategoriaComponent,
+    AtualizarCategoriaComponent,
+    DialogExclusaoCategoriasComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +42,7 @@ import { NovaCategoriaComponent } from './components/Categoria/nova-categoria/no
     ReactiveFormsModule,
     MatFormFieldModule,
     MatInputModule,
+    MatDialogModule,
     MatDividerModule,
     MatSelectModule,
     BrowserAnimationsModule,

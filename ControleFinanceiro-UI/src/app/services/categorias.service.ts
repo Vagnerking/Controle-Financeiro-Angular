@@ -32,9 +32,9 @@ export class CategoriasService {
     return this.http.post<Categoria>(this.url, categoria, httpOptions);
   }
 
-  AtualizarCategoria(categoriaId: number) : Observable<any>{
+  AtualizarCategoria(categoriaId: number, categoria: Categoria) : Observable<any>{
     const apiurl = `${this.url}/${categoriaId}`;
-    return this.http.put<Categoria>(apiurl, categoriaId, httpOptions);
+    return this.http.put<Categoria>(apiurl, categoria, httpOptions);
   }
 
   ExcluirCategoria(categoriaId: number) : Observable<any>{
